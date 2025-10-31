@@ -9,11 +9,16 @@ class Kriteria extends Model
 {
     use HasFactory;
     protected $table = 'kriteria';
-    Protected $fillable = ['nama_kriteria','bobot','tipe','role'];
-    public function kpiNilai()
-{
-    return $this->hasMany(KpiNilai::class);
-}
+    protected $fillable = ['kode_kriteria', 'nama_kriteria', 'bobot', 'jabatan', 'tipe'];
 
+    public function kpiNilai()
+        {
+            return $this->hasMany(KpiNilai::class);
+        }
+
+    public function SubKriteria()
+    {
+        return $this->hasMany(SubKriteria::class);
+    }
 }
 

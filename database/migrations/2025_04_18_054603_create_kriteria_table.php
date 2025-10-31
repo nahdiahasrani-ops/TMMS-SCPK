@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('kriteria', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_kriteria');
-            $table->integer('bobot');
-            $table->enum('tipe', ['Benefit', 'Cost']);
-            $table->enum('role', ['operator', 'mekanik', 'hsse']);
+            $table->string('kode_kriteria', 10)->unique(); // contoh: C1, C2
+            $table->string('nama_kriteria', 100);
+            $table->decimal('bobot', 5, 4)->default(0);
+            $table->enum('jabatan', ['Operator', 'Mekanik', 'HSSE'])
+                ->nullable(); // kalau nanti mau fleksibel
+            $table->enum('tipe', ['benefit', 'cost'])
+                ->default('benefit');
             $table->timestamps();
+            $table->index('nama_kriteria');
         });
     }
 

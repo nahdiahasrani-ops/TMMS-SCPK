@@ -2,107 +2,183 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TMMS-SCPK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="font-sans fixed">
-    <nav class="w-screen bg-[#225395] text-white py-5 px-2">
-        <div class="flex justify-between px-5">
-            <p class="font-bold">TMMS</p>
-    
-            <div class="text-sm font-thin flex gap-4">
-                <a href="/"
-                   class="{{ Request::is('/') ? 'font-bold underline underline-offset-4 text-white' : 'hover:font-bold transition-all duration-100 ease-in' }}">
-                    Dashboard
-                </a>
-                <a href="/Kriteria-Operator"
-                   class="{{ Request::is('Kriteria-Operator*') ? 'font-bold underline underline-offset-4 text-white' : 'hover:font-bold transition-all duration-100 ease-in' }}">
-                    Kriteria
-                </a>
-                <a href="/DataKaryawan"
-                   class="{{ Request::is('DataKaryawan*') ? 'font-bold underline underline-offset-4 text-white' : 'hover:font-bold transition-all duration-100 ease-in' }}">
-                    Data Karyawan
-                </a>
-                <a href="/Alternatif"
-                   class="{{ Request::is('Alternatif*') ? 'font-bold underline underline-offset-4 text-white' : 'hover:font-bold transition-all duration-100 ease-in' }}">
-                    Alternatif
-                </a>
-                <a href="/HasilRanking"
-                   class="{{ Request::is('HasilRanking*') ? 'font-bold underline underline-offset-4 text-white' : 'hover:font-bold transition-all duration-100 ease-in' }}">
-                    Hasil Ranking
-                </a>
-            </div>
-    
-            <a href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-                    <path fill="currentColor" fill-rule="evenodd"
-                          d="M256 42.667A213.333 213.333 0 0 1 469.334 256c0 117.821-95.513 213.334-213.334 213.334c-117.82 0-213.333-95.513-213.333-213.334C42.667 138.18 138.18 42.667 256 42.667m21.334 234.667h-42.667c-52.815 0-98.158 31.987-117.715 77.648c30.944 43.391 81.692 71.685 139.048 71.685s108.104-28.294 139.049-71.688c-19.557-45.658-64.9-77.645-117.715-77.645M256 106.667c-35.346 0-64 28.654-64 64s28.654 64 64 64s64-28.654 64-64s-28.653-64-64-64" />
-                </svg>
-            </a>
+<body class="bg-gray-200 h-screen ">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#121212] text-gray-300 h-full flex flex-col p-5 space-y-6 shadow-lg fixed">
+        <div class="flex items-center justify-between">
+            <h1 class="text-xl font-semibold text-white">TMMS-SCPK</h1>
+            <button class="text-gray-400 hover:text-white">
+                <!-- Menu Icon -->
+                {{-- <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg> --}}
+            </button>
         </div>
-    </nav>
-    
-    <div class="w-screen bg-[#225395] text-white mt-[1px] p-5 px-20 shadow-lg">
-        <p>Selamat datang admin</p>
-        <div class="w-full bg-slate-100/40 mt-1 items-center flex justify-between px-10">
-            <div class="py-5 flex items-center">
-                <svg class="size-14" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24">
-                    <path fill="currentColor"
-                        d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5s3.5 1.57 3.5 3.5s-1.57 3.5-3.5 3.5z">
-                        <animateTransform attributeName="transform" attributeType="XML" dur="10s" from="0 12 12"
-                            repeatCount="indefinite" to="360 12 12" type="rotate" />
-                    </path>
-                </svg>
-                <p class="text-xl ml-2 font-bold">Departemen Oprasional</p>
-            </div>
-            <div class="flex">
-                <!-- Operator -->
-                
-                    <div class="px-7 border-x-2 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="size-10 mx-auto" width="512" height="512"
-                            viewBox="0 0 512 512">
-                            <path fill="currentColor" fill-rule="evenodd"
-                                d="M256 42.667c117.821 0 213.334 95.513 213.334 213.333c0 117.821-95.513 213.334-213.334 213.334c-117.82 0-213.333-95.513-213.333-213.334C42.667 138.18 138.18 42.667 256 42.667M85.334 256c0 87.032 65.145 158.848 149.332 169.346V316.358c-21.87-7.73-38.283-27.01-41.913-50.51L85.636 245.762q-.301 5.081-.302 10.238m341.031-10.238l-107.118 20.086c-3.629 23.5-20.043 42.78-41.913 50.51v108.988C361.523 414.848 426.668 343.032 426.668 256q-.001-5.156-.302-10.238M256 85.334c-76.056 0-140.493 49.75-162.541 118.484l107.16 20.085C211.699 204.827 232.352 192 256 192c23.65 0 44.302 12.827 55.382 31.903l107.16-20.085C396.493 135.084 332.057 85.334 256 85.334" />
+
+        <div>
+            <h2 class="text-xs uppercase tracking-wide text-gray-500 mb-3"> Panel Navigasi</h2>
+            @if (Auth::user()->role === 1)
+                <nav class="space-y-2">
+
+                    <!-- Active Dashboard -->
+                    <a href="/home"
+                        class="{{ Request::is('home') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9.75z" />
                         </svg>
-                        <p class="text-center">Operator</p>
-                    </div>
-                
-                <!-- mekanik -->
-               
-                    <div class="px-7">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto size-10" width="32" height="32"
-                            viewBox="0 0 32 32">
-                            <g fill="currentColor">
+                        Dashboard
+                    </a>
+
+                    <a href="/kriteria"
+                        class="{{ Request::is('kriteria*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M12 2v5.054c0 .424 0 .837.046 1.177c.051.383.177.82.54 1.183s.8.489 1.184.54c.34.046.752.046 1.176.046H20v6c0 2.828 0 4.243-.879 5.121C18.243 22 16.828 22 14 22h-4c-2.828 0-4.243 0-5.121-.879C4 20.243 4 18.828 4 16V8c0-2.828 0-4.243.879-5.121C5.757 2 7.172 2 10 2zm2 .005V7c0 .5.002.774.028.964v.007l.008.001c.19.026.464.028.964.028h4.995c-.01-.412-.043-.684-.147-.937c-.152-.367-.441-.657-1.02-1.235l-2.656-2.656c-.578-.578-.867-.868-1.235-1.02c-.253-.105-.525-.137-.937-.147"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Data Kriteria
+                    </a>
+
+                    <!-- Menu Lain -->
+                    <a href="/karyawan"
+                        class="{{ Request::is('karyawan*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="16" height="16"
+                            viewBox="0 0 16 16">
+                            <path fill="currentColor"
+                                d="M8 2.002a1.998 1.998 0 1 0 0 3.996a1.998 1.998 0 0 0 0-3.996M12.5 3a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3m-9 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3M5 7.993A1 1 0 0 1 6 7h4a1 1 0 0 1 1 1v3a3 3 0 0 1-.146.927A3.001 3.001 0 0 1 5 11zM4 8c0-.365.097-.706.268-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 0 0 3.436 2.319A4 4 0 0 1 4 10.999zm8 0v3c0 .655-.157 1.273-.436 1.819A2.5 2.5 0 0 0 15 10.5V8a1 1 0 0 0-1-1h-2.268c.17.294.268.635.268 1" />
+                        </svg>
+                        Data Karyawan
+                    </a>
+
+                    <a href="/alternatif"
+                        class="{{ Request::is('alternatif*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 -w-5" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12.75 15.5a.25.25 0 0 0-.25.25v8a.25.25 0 0 0 .25.25H18a3 3 0 0 0 3-3v-5.25a.25.25 0 0 0-.25-.25ZM15 18h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m-3.5-4.25a.25.25 0 0 0-.25-.25h-8a.25.25 0 0 0-.25.25V21a3 3 0 0 0 3 3h5.25a.25.25 0 0 0 .25-.25Zm-5.85 2.6a.49.49 0 0 1 .7-.7l1 1a.27.27 0 0 0 .36 0l1-1a.49.49 0 0 1 .7.7l-1 1a.27.27 0 0 0 0 .36l1 1a.48.48 0 0 1 0 .7a.48.48 0 0 1-.7 0l-1-1a.27.27 0 0 0-.36 0l-1 1a.48.48 0 0 1-.7 0a.48.48 0 0 1 0-.7l1-1a.27.27 0 0 0 0-.36ZM16 5.75a.76.76 0 0 0 .75-.75V3.5a.75.75 0 0 0-1.5 0V5a.76.76 0 0 0 .75.75" />
+                            <path fill="currentColor"
+                                d="M18 0H6a3 3 0 0 0-3 3v11.25a.25.25 0 0 0 .25.25h8a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-6A.25.25 0 0 1 5 6.25V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3.25a.25.25 0 0 1-.25.25h-6a.25.25 0 0 0-.25.25v7.5a.25.25 0 0 0 .25.25h8a.25.25 0 0 0 .25-.25V3a3 3 0 0 0-3-3M9 11.5h-.75a.25.25 0 0 0-.25.25v.75a.5.5 0 0 1-1 0v-.75a.25.25 0 0 0-.25-.25H6a.5.5 0 0 1 0-1h.75a.25.25 0 0 0 .25-.25V9.5a.5.5 0 0 1 1 0v.75a.25.25 0 0 0 .25.25H9a.5.5 0 0 1 0 1m9 0h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1" />
+                        </svg>
+                        Alternatif
+                    </a>
+
+                    <a href="/hasil-akhir"
+                        class="{{ Request::is('hasil-akhir*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="256" height="256"
+                            viewBox="0 0 256 256">
+                            <path fill="currentColor"
+                                d="M240 200h-8v-56a16 16 0 0 0-16-16h-40V56a16 16 0 0 0-16-16H96a16 16 0 0 0-16 16v32H40a16 16 0 0 0-16 16v96h-8a8 8 0 0 0 0 16h224a8 8 0 0 0 0-16m-160 0H40v-96h40Zm60-64a8 8 0 0 1-16 0v-28.9l-1.47.49a8 8 0 0 1-5.06-15.18l12-4A8 8 0 0 1 140 96Zm76 64h-40v-56h40Z" />
+                        </svg>
+                        Hasil Akhir
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-red-800/50 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
                                 <path
-                                    d="M12.56 9.2c-.67 0-1.23.46-1.38 1.08c-.05.17.09.35.27.35h.44a.913.913 0 0 1 .88-1.15c.51 0 .91.41.91.91q0 .12-.03.24h.08c.15 0 .26-.13.23-.28c-.13-.66-.71-1.15-1.4-1.15m4.89 0c.67 0 1.23.46 1.38 1.08c.04.18-.09.35-.27.35h-.44q.03-.12.03-.24c0-.5-.41-.91-.91-.91a.9.9 0 0 0-.91.91q0 .12.03.24h-.08a.23.23 0 0 1-.23-.28c.13-.66.7-1.15 1.4-1.15" />
-                                <path
-                                    d="M12.77 9.86a.516.516 0 0 1 .46.76h-.92a.52.52 0 0 1 .016-.513a.16.16 0 1 0 .24-.207a.5.5 0 0 1 .204-.04m4.47 0a.5.5 0 0 0-.19.035a.16.16 0 1 1-.244.196a.52.52 0 0 0-.026.529h.92q.06-.105.06-.24c0-.29-.23-.52-.52-.52m-2.55.45l-.53 1.71c-.11.35.15.71.52.71h.78c.37 0 .63-.36.52-.71l-.53-1.71c-.11-.38-.64-.38-.76 0m-1.17 3.01c.43.23.94.36 1.48.36c.55 0 1.05-.13 1.48-.36c.14-.07.3.09.21.23c-.36.55-.98.92-1.69.92s-1.33-.37-1.69-.92c-.09-.14.06-.31.21-.23" />
-                                <path
-                                    d="M19.78 3.058c-.91-.89-2.29-1.245-3.73-1.245h-2.11c-1.44 0-2.82.354-3.73 1.245c-.7.684-1.08 1.938-.8 3.348l.068-.008q-.198.168-.392.353l-.334.317l.485.603l.013.544q.003.12.011.24l.015.214a2.14 2.14 0 0 0 .278 3.971l.097 1.395l.001.013c.045.459.163.888.341 1.278q.161.352.385.657l-.358.145A11.43 11.43 0 0 0 3.5 26.5V30a.5.5 0 0 0 .5.5h21.99q.068 0 .134-.02h.006a1.37 1.37 0 0 0 1.37-1.37v-3.512a1 1 0 0 0-.01-.165v-1.855a1.503 1.503 0 0 0-1.96-1.428v-1.084c0-.1.06-.2.15-.25c.79-.42 1.32-1.25 1.32-2.2c-.01-.93-.54-1.76-1.32-2.18c-.19-.1-.43.03-.43.25v1.55c0 .42-.34.77-.76.76a.745.745 0 0 1-.73-.75v-1.56c0-.22-.24-.36-.43-.26a2.48 2.48 0 0 0-1.3 1.97v.449c.079.865.61 1.608 1.35 1.991c.09.05.15.15.15.25v3.144h-.7a.5.5 0 0 0-.127.017a1.3 1.3 0 0 0-.673.273v-3.453a3.47 3.47 0 0 1-.945-3.122l.008.006a3.5 3.5 0 0 1 .344-.969q-.703-.481-1.467-.856l.013-.018a4 4 0 0 0-.398-.102a3.9 3.9 0 0 0 .743-1.958v-.013l.098-1.391a2.14 2.14 0 0 0 .278-3.98l.015-.21q.008-.111.011-.222l.015-.502l.533-.662l-.334-.317a9 9 0 0 0-.387-.347l.023.002c.28-1.402-.1-2.664-.8-3.348m-.098 5.893l-.35 5.007c-.149 1.498-1.319 2.542-2.732 2.542h-3.22a2.7 2.7 0 0 1-2.376-1.389a2.95 2.95 0 0 1-.356-1.153l-.35-5.008c.299.027.608-.03.887-.179l.011-.006a.53.53 0 0 0 .374.145c.11 0 .23-.03.33-.1c.02-.02.52-.39 1.27-.29a.55.55 0 0 0 .613-.592a8.4 8.4 0 0 1 2.434 0a.55.55 0 0 0 .613.592c.719-.087 1.21.25 1.266.287l.004.003c.1.07.21.11.33.11a.6.6 0 0 0 .382-.15h.001c.274.149.576.206.869.181m.825 2.535l.116-1.664a1.137 1.137 0 0 1-.116 1.664m-11.035-.008a1.14 1.14 0 0 1-.115-1.646zm7.958 5.931c.382-.086.742-.23 1.07-.424v4.095q-.002.029-.008.036a.1.1 0 0 1-.023.02a.1.1 0 0 1-.03.007l-.02-.005l-2.484-2.145a2.58 2.58 0 0 0 1.495-1.584m-1.402.091h.25a1.56 1.56 0 0 1-2.56 0zm-4.528-.503c.328.191.687.333 1.068.416a2.56 2.56 0 0 0 1.495 1.581l-2.483 2.144l-.019.005a.1.1 0 0 1-.03-.007a.1.1 0 0 1-.023-.02a.1.1 0 0 1-.008-.036zm.031-10.74a8.26 8.26 0 0 1 6.967-.001c.501.236.963.531 1.416.913l-.114.14l-.002.004a.5.5 0 0 1-.634.123h-.002a8.6 8.6 0 0 0-4.142-1.053a8.6 8.6 0 0 0-4.142 1.052l-.002.002a.516.516 0 0 1-.648-.129l-.112-.14a6 6 0 0 1 1.412-.91zm8.429 10.988v5.345c0 .23-.18.41-.41.41h-9.07c-.23 0-.41-.18-.41-.41v-5.368q.212-.112.43-.214v4.072c0 .867.968 1.36 1.668.87l.02-.015l2.724-2.353a.135.135 0 0 1 .176 0l2.724 2.353l.02.014c.7.492 1.668-.002 1.668-.869v-4.068q.233.11.46.233M8 18.657V29.5H4.5v-3A10.44 10.44 0 0 1 8 18.657m18.49 5.53h-.96v-.803a.5.5 0 0 1 .46-.306c.274 0 .5.226.5.5zm-3.66 5.293c-.155 0-.264-.118-.27-.236a.27.27 0 0 1 .117-.228a.5.5 0 0 0-.014-.841a.22.22 0 0 1-.103-.195c0-.078.044-.156.113-.2a.5.5 0 0 0-.01-.845a.22.22 0 0 1-.103-.195c0-.078.044-.156.113-.2a.5.5 0 0 0 .004-.836a.25.25 0 0 1-.117-.215v-.007c.003-.12.113-.242.27-.242a.5.5 0 0 0 .1-.01h3.2c.18 0 .33.128.363.298l.007.074v3.508a.37.37 0 0 1-.37.37zm-9.13-3.74c0 .72-.57 1.29-1.29 1.29h-1.45c-.71 0-1.29-.58-1.29-1.29s.58-1.29 1.29-1.29h1.45c.71 0 1.29.58 1.29 1.29" />
+                                    d="M19.353 6.5H16.49V9H6.404v6H16.49v2.5h2.864A9.99 9.99 0 0 1 11 22C5.477 22 1 17.523 1 12S5.477 2 11 2a9.99 9.99 0 0 1 8.353 4.5M17.989 16v-1zm0-8v1z" />
+                                <path d="m18.99 8l4 4l-4 4h-1v-2.5h-10v-3h10V8z" />
                             </g>
                         </svg>
-                        <p class="text-center">Mekanik</p>
-                    </div>
-                
-                <!-- HSSE -->
-               
-                <div class="px-7 border-l-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-10 mx-auto" width="2048" height="2048"
-                        viewBox="0 0 2048 2048">
-                        <path fill="currentColor"
-                            d="M1504 128q113 0 212 42t172 116t116 173t43 212q0 58-12 115t-36 110h-463l-192-200l-320 320l-448-448l-320 328H49q-24-53-36-110T1 671q0-113 42-212t116-172t173-116t212-43q109 0 208 41t177 118l95 96l95-96q77-77 176-118t209-41m-96 896h510l-14 16q-7 8-15 17l-865 864l-865-864q-8-8-15-16t-14-17h254l192-184l448 448l320-320z" />
-                    </svg>
-                    <p class="text-center">HSSE</p>
-                </div>
-              
-            </div>
+                        Logout
+                    </a>
+                </nav>
+            @else
+                <nav class="space-y-2">
+
+                    <!-- Active Dashboard -->
+                    <a href="/home1"
+                        class="{{ Request::is('home1') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 9.75L12 3l9 6.75V21a.75.75 0 01-.75.75H3.75A.75.75 0 013 21V9.75z" />
+                        </svg>
+                        Dashboard
+                    </a>
+
+                    <a href="/kriteria1"
+                        class="{{ Request::is('kriteria1*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M12 2v5.054c0 .424 0 .837.046 1.177c.051.383.177.82.54 1.183s.8.489 1.184.54c.34.046.752.046 1.176.046H20v6c0 2.828 0 4.243-.879 5.121C18.243 22 16.828 22 14 22h-4c-2.828 0-4.243 0-5.121-.879C4 20.243 4 18.828 4 16V8c0-2.828 0-4.243.879-5.121C5.757 2 7.172 2 10 2zm2 .005V7c0 .5.002.774.028.964v.007l.008.001c.19.026.464.028.964.028h4.995c-.01-.412-.043-.684-.147-.937c-.152-.367-.441-.657-1.02-1.235l-2.656-2.656c-.578-.578-.867-.868-1.235-1.02c-.253-.105-.525-.137-.937-.147"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Data Kriteria
+                    </a>
+
+                    <!-- Menu Lain -->
+                    <a href="/karyawan1"
+                        class="{{ Request::is('karyawan1*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="16" height="16"
+                            viewBox="0 0 16 16">
+                            <path fill="currentColor"
+                                d="M8 2.002a1.998 1.998 0 1 0 0 3.996a1.998 1.998 0 0 0 0-3.996M12.5 3a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3m-9 0a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3M5 7.993A1 1 0 0 1 6 7h4a1 1 0 0 1 1 1v3a3 3 0 0 1-.146.927A3.001 3.001 0 0 1 5 11zM4 8c0-.365.097-.706.268-1H2a1 1 0 0 0-1 1v2.5a2.5 2.5 0 0 0 3.436 2.319A4 4 0 0 1 4 10.999zm8 0v3c0 .655-.157 1.273-.436 1.819A2.5 2.5 0 0 0 15 10.5V8a1 1 0 0 0-1-1h-2.268c.17.294.268.635.268 1" />
+                        </svg>
+                        Data Karyawan
+                    </a>
+
+                    <a href="/alternatif1"
+                        class="{{ Request::is('alternatif1*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 -w-5" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="M12.75 15.5a.25.25 0 0 0-.25.25v8a.25.25 0 0 0 .25.25H18a3 3 0 0 0 3-3v-5.25a.25.25 0 0 0-.25-.25ZM15 18h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m0 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m-3.5-4.25a.25.25 0 0 0-.25-.25h-8a.25.25 0 0 0-.25.25V21a3 3 0 0 0 3 3h5.25a.25.25 0 0 0 .25-.25Zm-5.85 2.6a.49.49 0 0 1 .7-.7l1 1a.27.27 0 0 0 .36 0l1-1a.49.49 0 0 1 .7.7l-1 1a.27.27 0 0 0 0 .36l1 1a.48.48 0 0 1 0 .7a.48.48 0 0 1-.7 0l-1-1a.27.27 0 0 0-.36 0l-1 1a.48.48 0 0 1-.7 0a.48.48 0 0 1 0-.7l1-1a.27.27 0 0 0 0-.36ZM16 5.75a.76.76 0 0 0 .75-.75V3.5a.75.75 0 0 0-1.5 0V5a.76.76 0 0 0 .75.75" />
+                            <path fill="currentColor"
+                                d="M18 0H6a3 3 0 0 0-3 3v11.25a.25.25 0 0 0 .25.25h8a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-6A.25.25 0 0 1 5 6.25V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3.25a.25.25 0 0 1-.25.25h-6a.25.25 0 0 0-.25.25v7.5a.25.25 0 0 0 .25.25h8a.25.25 0 0 0 .25-.25V3a3 3 0 0 0-3-3M9 11.5h-.75a.25.25 0 0 0-.25.25v.75a.5.5 0 0 1-1 0v-.75a.25.25 0 0 0-.25-.25H6a.5.5 0 0 1 0-1h.75a.25.25 0 0 0 .25-.25V9.5a.5.5 0 0 1 1 0v.75a.25.25 0 0 0 .25.25H9a.5.5 0 0 1 0 1m9 0h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 1 0 1" />
+                        </svg>
+                        Alternatif
+                    </a>
+
+                    <a href="/hasil-akhir1"
+                        class="{{ Request::is('hasil-akhir1*') ? 'flex gap-3 bg-blue-600 px-4 py-2 rounded-lg' : 'flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="256" height="256"
+                            viewBox="0 0 256 256">
+                            <path fill="currentColor"
+                                d="M240 200h-8v-56a16 16 0 0 0-16-16h-40V56a16 16 0 0 0-16-16H96a16 16 0 0 0-16 16v32H40a16 16 0 0 0-16 16v96h-8a8 8 0 0 0 0 16h224a8 8 0 0 0 0-16m-160 0H40v-96h40Zm60-64a8 8 0 0 1-16 0v-28.9l-1.47.49a8 8 0 0 1-5.06-15.18l12-4A8 8 0 0 1 140 96Zm76 64h-40v-56h40Z" />
+                        </svg>
+                        Hasil Akhir
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                        class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-red-800/50 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+                                <path
+                                    d="M19.353 6.5H16.49V9H6.404v6H16.49v2.5h2.864A9.99 9.99 0 0 1 11 22C5.477 22 1 17.523 1 12S5.477 2 11 2a9.99 9.99 0 0 1 8.353 4.5M17.989 16v-1zm0-8v1z" />
+                                <path d="m18.99 8l4 4l-4 4h-1v-2.5h-10v-3h10V8z" />
+                            </g>
+                        </svg>
+                        Logout
+                    </a>
+
+                </nav>
+            @endif
         </div>
-    </div>
+    </aside>
+
 </body>
 
 </html>

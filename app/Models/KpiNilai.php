@@ -7,25 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class KpiNilai extends Model
 {
-    use HasFactory;
     protected $table = 'kpi_nilais';
+    protected $fillable = ['karyawan_id','sub_kriteria_id','tahun','bulan','nilai'];
 
-    protected $fillable = [
-        'data_karyawans_id',
-        'kriteria_id',
-        'bulan',
-        'tahun',
-        'nilai',
-    ];
-
-    public function karyawan()
-    {
-        return $this->belongsTo(DataKaryawan::class, 'data_karyawan_id');
-    }
-
-    public function kriteria()
-    {
-        return $this->belongsTo(Kriteria::class);
-    }
-
+    public function karyawan() { return $this->belongsTo(Karyawan::class); }
+    public function subKriteria() { return $this->belongsTo(SubKriteria::class); }
 }
